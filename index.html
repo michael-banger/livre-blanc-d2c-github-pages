@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Livre Blanc IA &amp; E-commerce D2C — La méthode pour bâtir une marque rentable en 2026</title>
+<meta name="description" content="Le guide complet pour intégrer l'IA dans votre stratégie D2C omnicanale, du contenu à la rentabilité. Téléchargement gratuit." />
+<meta name="robots" content="index, follow" />
+<meta property="og:title" content="Livre Blanc IA & E-commerce D2C — Méthode 2026" />
+<meta property="og:description" content="Intégrez l'IA dans votre stratégie D2C, du contenu à la rentabilité. Guide gratuit." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+<style>
+/* =====================================================================
+   Livre Blanc IA & D2C — single-page landing
+   Display and body: Inter
+   Off-black base #070E1A · single accent Electric Blue #2E6BFF
+   No neon glows (tinted shadows) · asymmetric hero · bento benefits
+   ===================================================================== */
+
+:root{
+  --bg:#070E1A;
+  --bg-2:#0A1322;
+  --surface:#0D1726;
+  --surface-2:#111E33;
+  --line:rgba(148,170,214,.12);
+  --line-2:rgba(148,170,214,.22);
+  --accent:#2E6BFF;
+  --secondary:#7B61FF;
+  --tertiary:#00A7D6;
+  --accent-press:#2458d8;
+  --accent-soft:rgba(46,107,255,.12);
+  --text:#F3F6FF;
+  --muted:#92A2C4;
+  --muted-2:#5E6E8C;
+  --r:18px;
+  --maxw:1180px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-weight:400;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Ambient grain + soft tint — fixed, pointer-none (perf-safe) */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(1100px 640px at 82% -10%, rgba(123,97,255,.22), transparent 62%),
+    radial-gradient(960px 760px at 8% 20%, rgba(46,107,255,.12), transparent 58%),
+    radial-gradient(780px 520px at 65% 100%, rgba(0,167,214,.10), transparent 60%);
+}
+.mesh{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(148,170,214,.04) 1px, transparent 1px);
+  background-size:42px 42px;
+  mask-image:radial-gradient(70% 60% at 50% 0%, #000 30%, transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 0%, #000 30%, transparent 100%);
+}
+main,header,footer{position:relative;z-index:1}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* ---------- Type ---------- */
+h1,h2,h3,.display{font-family:'Inter',sans-serif;letter-spacing:0;line-height:1.06;font-weight:600}
+h1{font-size:clamp(2.3rem,4.6vw,3.9rem);font-weight:700}
+h2{font-size:clamp(1.8rem,3.3vw,2.6rem)}
+h3{font-size:1.18rem;letter-spacing:0}
+p{color:var(--muted);max-width:62ch}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;
+  font-family:'Inter',sans-serif;
+  color:var(--accent);font-weight:500;font-size:.78rem;
+  text-transform:uppercase;letter-spacing:0;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--accent);opacity:.6}
+.accent{color:var(--accent)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(135deg,var(--accent),var(--secondary));color:#fff;font-weight:700;font-size:1rem;
+  padding:16px 28px;border:1px solid rgba(255,255,255,.10);border-radius:13px;
+  text-decoration:none;cursor:pointer;
+  box-shadow:0 20px 44px -20px rgba(46,107,255,.9), inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .25s var(--ease), background .2s var(--ease), box-shadow .25s var(--ease);
+}
+.btn:hover{transform:translateY(-2px);background:linear-gradient(135deg,#3a76ff,#8b72ff);box-shadow:0 26px 56px -22px rgba(123,97,255,.9), inset 0 1px 0 rgba(255,255,255,.22)}
+.btn:active{transform:translateY(0) scale(.985);background:var(--accent-press)}
+.btn .arrow{transition:transform .25s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+
+/* =====================================================================
+   HERO — asymmetric split (left copy / right artifact)
+   ===================================================================== */
+.hero{padding:72px 0 64px}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
+}
+.badge{
+  display:inline-flex;align-items:center;gap:9px;
+  background:var(--accent-soft);
+  border:1px solid rgba(46,107,255,.32);
+  color:#cdddff;font-size:.8rem;font-weight:500;
+  padding:7px 14px;border-radius:999px;margin-bottom:26px;
+}
+.badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);position:relative}
+.badge .dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--accent);opacity:.5;animation:ping 2.4s var(--ease) infinite}
+@keyframes ping{0%{transform:scale(.6);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+
+.hero h1{margin-bottom:22px}
+.hero .sub{font-size:1.12rem;color:var(--muted);max-width:30ch}
+.hero .cta-row{margin-top:34px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+
+.proof-mini{display:flex;align-items:center;gap:13px}
+.avatars{display:inline-flex}
+.avatars span{
+  width:34px;height:34px;border-radius:50%;margin-left:-10px;
+  border:2px solid var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Inter',sans-serif;font-size:.7rem;font-weight:600;color:#dbe6ff;
+  background:linear-gradient(150deg,#1b2c4a,#0f1a2e);
+}
+.avatars span:first-child{margin-left:0}
+.proof-mini small{color:var(--muted);font-size:.86rem;line-height:1.35;max-width:21ch}
+.proof-mini b{color:var(--text);font-weight:700}
+
+/* Hero artifact — the white-paper "object" */
+.artifact{position:relative;justify-self:center;width:100%;max-width:360px}
+.paper{
+  position:relative;
+  background:linear-gradient(165deg,rgba(17,30,51,.92),rgba(8,13,24,.96));
+  border:1px solid rgba(123,97,255,.28);
+  border-radius:20px;
+  padding:30px 28px 26px;
+  box-shadow:0 48px 96px -34px rgba(0,0,0,.86), 0 0 60px -36px rgba(123,97,255,.95), inset 0 1px 0 rgba(255,255,255,.06);
+  transform:rotate(-2.5deg);
+  animation:float 7s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:rotate(-2.5deg) translateY(0)}50%{transform:rotate(-2.5deg) translateY(-10px)}}
+.paper .kicker{font-family:'Inter',sans-serif;font-size:.7rem;letter-spacing:0;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.paper .ptitle{font-family:'Inter',sans-serif;font-size:1.22rem;font-weight:600;line-height:1.2;margin-bottom:10px;letter-spacing:0}
+.paper .pdesc{font-size:.84rem;color:var(--muted)}
+.paper .lines{margin-top:20px;display:grid;gap:9px}
+.paper .lines i{height:8px;border-radius:5px;background:rgba(148,170,214,.12);display:block}
+.paper .lines i:nth-child(1){width:94%}
+.paper .lines i:nth-child(2){width:72%;background:rgba(46,107,255,.4)}
+.paper .lines i:nth-child(3){width:84%}
+.paper .pmeta{
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.paper .pmeta span{font-family:'Inter',sans-serif;font-size:.78rem;color:var(--muted)}
+.paper .pmeta b{font-size:1.5rem;font-weight:700;color:var(--text);font-family:'Inter',sans-serif}
+.artifact .chip{
+  position:absolute;right:-14px;bottom:30px;
+  background:var(--bg-2);border:1px solid var(--line-2);
+  border-radius:12px;padding:11px 14px;
+  box-shadow:0 20px 40px -20px rgba(0,0,0,.9);
+  display:flex;align-items:center;gap:9px;
+  animation:float2 7s ease-in-out infinite;
+}
+@keyframes float2{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.artifact .chip .ic{width:30px;height:30px;border-radius:8px;background:var(--accent-soft);border:1px solid rgba(46,107,255,.3);display:flex;align-items:center;justify-content:center}
+.artifact .chip .ic svg{width:16px;height:16px;stroke:var(--accent);fill:none;stroke-width:2}
+.artifact .chip small{font-size:.7rem;color:var(--muted);display:block;line-height:1.2}
+.artifact .chip b{font-family:'Inter',sans-serif;font-size:.9rem;color:var(--text)}
+
+/* =====================================================================
+   STATEMENT band (Agitate — depth)
+   ===================================================================== */
+.statement{padding:34px 0}
+.statement .inner{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:46px 0;
+}
+.statement p{
+  font-family:'Inter',sans-serif;font-weight:500;
+  font-size:clamp(1.4rem,2.8vw,2.1rem);line-height:1.25;color:var(--text);
+  max-width:20ch;letter-spacing:0;
+}
+.statement p .accent{display:block}
+.statement .src{margin-top:16px;font-size:.85rem;color:var(--muted-2);font-family:'Inter',sans-serif}
+
+/* =====================================================================
+   Section scaffolding
+   ===================================================================== */
+section.blk{padding:84px 0}
+.shead{max-width:620px;margin-bottom:48px}
+.shead h2{margin:16px 0 14px}
+.shead p{font-size:1.05rem}
+
+/* ---------- BENEFITS — bento (no 3-equal-card row) ---------- */
+.bento{display:grid;grid-template-columns:1.25fr 1fr;grid-template-rows:auto auto;gap:18px}
+.bcard{
+  position:relative;
+  background:linear-gradient(165deg,rgba(17,30,51,.84),rgba(9,14,26,.94));
+  border:1px solid rgba(123,97,255,.18);border-radius:var(--r);
+  padding:30px 28px;
+  transition:transform .3s var(--ease),border-color .3s var(--ease);
+  overflow:hidden;
+}
+.bcard:hover{transform:translateY(-3px);border-color:rgba(46,107,255,.42)}
+.bcard.feature{grid-row:1 / span 2;display:flex;flex-direction:column;justify-content:space-between;padding:34px 32px}
+.bcard .num{
+  font-family:'Inter',sans-serif;font-size:.78rem;color:var(--muted-2);
+  letter-spacing:0;margin-bottom:auto;
+}
+.ic-box{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);border:1px solid rgba(46,107,255,.28);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+  margin-bottom:22px;
+}
+.ic-box svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.7}
+.bcard h3{margin-bottom:10px}
+.bcard p{font-size:.96rem;max-width:38ch}
+.bcard.feature .big-illu{
+  margin-top:26px;height:120px;border-radius:12px;
+  border:1px solid var(--line);background:var(--bg-2);
+  position:relative;overflow:hidden;
+}
+.bcard.feature .big-illu .row{position:absolute;left:18px;right:18px;height:30px;border-radius:8px;border:1px solid var(--line);display:flex;align-items:center;padding:0 12px;gap:10px;background:var(--surface)}
+.bcard.feature .big-illu .row b{width:8px;height:8px;border-radius:50%}
+.bcard.feature .big-illu .row span{height:7px;border-radius:4px;background:rgba(148,170,214,.16)}
+.bcard.feature .big-illu .r1{top:16px}
+.bcard.feature .big-illu .r1 b{background:var(--accent)} .bcard.feature .big-illu .r1 span{width:46%}
+.bcard.feature .big-illu .r2{top:54px;opacity:.7} .bcard.feature .big-illu .r2 b{background:var(--muted-2)} .bcard.feature .big-illu .r2 span{width:66%}
+.bcard.feature .big-illu .r3{top:92px;opacity:.45} .bcard.feature .big-illu .r3 b{background:var(--muted-2)} .bcard.feature .big-illu .r3 span{width:38%}
+
+/* ---------- PROOF — editorial divider row, no boxes ---------- */
+.proof{padding:78px 0}
+.stamp{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:.92rem;color:var(--text);font-weight:500;
+  border:1px solid var(--line-2);border-radius:999px;padding:9px 18px;margin-bottom:42px;
+}
+.stamp svg{width:17px;height:17px;stroke:var(--accent);fill:none;stroke-width:2}
+.stats{display:grid;grid-template-columns:repeat(3,1fr)}
+.stat{padding:6px 30px}
+.stat:nth-child(2){border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.stat .big{font-family:'Inter',sans-serif;font-size:clamp(2.2rem,4.4vw,3rem);font-weight:700;line-height:1;color:var(--tertiary);letter-spacing:0}
+.stat .lbl{margin-top:14px;font-size:.92rem;color:var(--muted);max-width:26ch}
+
+/* ---------- PROGRAMME — what's inside (2-col list) ---------- */
+.toc{display:grid;grid-template-columns:1fr 1fr;gap:14px 40px}
+.toc-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.toc-item .n{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--accent);font-weight:600;min-width:30px;letter-spacing:0}
+.toc-item .t b{display:block;font-family:'Inter',sans-serif;font-weight:500;color:var(--text);font-size:1rem;margin-bottom:3px}
+.toc-item .t small{color:var(--muted);font-size:.84rem}
+
+/* =====================================================================
+   FORM
+   ===================================================================== */
+.form-wrap{padding:40px 0 96px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.form-copy .eyebrow{margin-bottom:18px}
+.form-copy h2{margin-bottom:16px}
+.form-copy p{font-size:1.02rem}
+.form-copy ul{list-style:none;margin-top:26px;display:grid;gap:13px}
+.form-copy li{display:flex;align-items:center;gap:12px;color:var(--text);font-size:.95rem}
+.form-copy li svg{width:18px;height:18px;stroke:var(--accent);fill:none;stroke-width:2.2;flex-shrink:0}
+
+.form-card{
+  background:linear-gradient(165deg,rgba(17,30,51,.86),rgba(9,14,26,.95));
+  border:1px solid rgba(123,97,255,.26);border-radius:22px;
+  padding:38px 34px;
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.85), 0 0 54px -42px rgba(123,97,255,.9), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.form-teaser{display:grid;gap:16px}
+.form-teaser h3{font-size:1.35rem}
+.form-teaser p{font-size:.96rem}
+
+.modal{
+  position:fixed;inset:0;z-index:100;
+  display:none;align-items:center;justify-content:center;
+  padding:22px;background:rgba(7,14,26,.78);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+}
+.modal.is-open{display:flex}
+.modal-panel{
+  position:relative;width:min(560px,100%);max-height:calc(100vh - 44px);overflow:auto;
+  background:linear-gradient(165deg,var(--surface-2),var(--surface));
+  border:1px solid var(--line-2);border-radius:22px;
+  padding:38px 34px 32px;
+  box-shadow:0 40px 110px -36px rgba(0,0,0,.95), inset 0 1px 0 rgba(255,255,255,.05);
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;z-index:3;
+  width:42px;height:42px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(243,246,255,.08);border:1px solid var(--line-2);
+  color:var(--text);font-size:1.5rem;line-height:1;cursor:pointer;
+  transition:background .2s var(--ease),transform .15s var(--ease),border-color .2s var(--ease);
+}
+.modal-close:hover{background:rgba(46,107,255,.18);border-color:rgba(46,107,255,.45)}
+.modal-close:active{transform:scale(.96)}
+.modal-head{padding-right:52px;margin-bottom:24px}
+.modal-head h2{font-size:1.55rem;margin-bottom:8px}
+.modal-head p{font-size:.94rem}
+body.modal-open{overflow:hidden}
+.form-progress{
+  position:relative;display:grid;grid-template-columns:repeat(4,1fr);
+  gap:0;margin:0 0 24px;
+}
+.form-progress::before,.form-progress-fill{
+  content:"";position:absolute;left:0;right:0;top:16px;height:2px;
+  background:rgba(148,170,214,.2);border-radius:99px;
+}
+.form-progress-fill{
+  right:auto;width:0;background:var(--accent);
+  box-shadow:0 0 0 1px rgba(46,107,255,.18);
+  transition:width .24s var(--ease);
+}
+.progress-step{
+  position:relative;z-index:1;display:grid;justify-items:center;gap:8px;
+  font-family:'Inter',sans-serif;font-size:.72rem;color:var(--muted-2);
+}
+.progress-dot{
+  width:34px;height:34px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--bg);border:1px solid var(--line-2);
+  color:var(--muted);font-weight:600;
+  transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);
+}
+.progress-step.is-active,.progress-step.is-complete{color:var(--text)}
+.progress-step.is-active .progress-dot,.progress-step.is-complete .progress-dot{
+  background:var(--accent);border-color:var(--accent);color:#fff;
+}
+.field{display:grid;gap:8px;margin-bottom:18px}
+.field label{font-size:.84rem;font-weight:600;color:var(--text);font-family:'Inter',sans-serif}
+.field input[type=text],.field input[type=email]{
+  width:100%;background:var(--bg);
+  border:1px solid var(--line-2);border-radius:12px;
+  color:var(--text);font-size:1rem;font-family:inherit;padding:14px 16px;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease);
+}
+.field input::placeholder{color:var(--muted-2)}
+.field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px rgba(46,107,255,.16)}
+.consent{display:flex;align-items:flex-start;gap:11px;margin:4px 0 22px;font-size:.81rem;color:var(--muted);line-height:1.55}
+.consent input{margin-top:3px;width:17px;height:17px;accent-color:var(--accent);flex-shrink:0;cursor:pointer}
+.consent a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.form-card .btn,.modal-panel .btn{width:100%}
+.under-btn{text-align:center;margin-top:15px;font-size:.78rem;color:var(--muted-2)}
+.err{color:#ff7a8a;font-size:.8rem;margin:-8px 0 14px;display:none}
+.btn.loading{position:relative;color:transparent;pointer-events:none}
+.btn.loading::after{content:"";position:absolute;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Success state */
+.thanks{display:none;text-align:center;padding:18px 6px}
+.thanks .check{
+  width:62px;height:62px;border-radius:16px;margin:0 auto 22px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);border:1px solid rgba(46,107,255,.4);
+}
+.thanks .check svg{width:30px;height:30px;stroke:var(--accent);fill:none;stroke-width:2.4}
+.thanks h2{margin-bottom:12px}
+.thanks p{font-size:1rem;margin:0 auto;max-width:34ch}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:30px 0}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot p{font-size:.84rem;color:var(--muted-2)}
+.foot a{color:var(--muted);text-decoration:none}
+.foot a:hover{color:var(--text)}
+.foot .mark{font-family:'Inter',sans-serif;font-weight:600;color:var(--text);font-size:.92rem;letter-spacing:0;display:flex;align-items:center;gap:9px}
+.foot .mark i{width:9px;height:9px;border-radius:3px;background:var(--accent);display:block}
+
+/* ---------- COOKIE ---------- */
+.cookie{
+  position:fixed;left:16px;right:16px;bottom:16px;z-index:60;
+  max-width:540px;margin:0 auto;
+  background:var(--bg-2);border:1px solid var(--line-2);border-radius:16px;
+  padding:16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.8);
+  transform:translateY(0);transition:transform .4s var(--ease),opacity .4s var(--ease);
+}
+.cookie.hide{transform:translateY(140%);opacity:0;pointer-events:none}
+.cookie p{font-size:.81rem;flex:1;min-width:200px;color:var(--muted)}
+.cookie a{color:var(--accent)}
+.cookie button{
+  font-family:'Inter',sans-serif;
+  background:var(--accent);color:#fff;border:none;border-radius:10px;
+  padding:9px 18px;font-weight:500;font-size:.84rem;cursor:pointer;
+  transition:background .2s var(--ease),transform .15s var(--ease);
+}
+.cookie button:hover{background:#3a76ff}
+.cookie button:active{transform:scale(.96)}
+
+/* ---------- Reveal ---------- */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.08s}.rv[data-d="2"]{transition-delay:.16s}.rv[data-d="3"]{transition-delay:.24s}
+
+/* ---------- Responsive ---------- */
+@media(max-width:960px){
+  .hero-grid{grid-template-columns:1fr;gap:48px}
+  .artifact{order:-1;max-width:320px;margin:0 auto}
+  .bento{grid-template-columns:1fr}
+  .bcard.feature{grid-row:auto}
+  .form-grid{grid-template-columns:1fr;gap:34px}
+}
+@media(max-width:680px){
+  .stats{grid-template-columns:1fr}
+  .stat{padding:22px 0;border-bottom:1px solid var(--line)}
+  .stat:nth-child(2){border-left:none;border-right:none;border-top:1px solid var(--line)}
+  .toc{grid-template-columns:1fr;gap:0}
+}
+@media(max-width:480px){
+  .wrap{padding:0 20px}
+  .hero{padding:52px 0 44px}
+  section.blk{padding:64px 0}
+  .form-card{padding:30px 22px}
+  .modal{padding:14px}
+  .modal-panel{padding:34px 22px 28px;max-height:calc(100vh - 28px)}
+  .progress-step{font-size:.68rem}
+  .progress-dot{width:30px;height:30px}
+  .form-progress::before,.form-progress-fill{top:15px}
+  .btn{width:100%}
+  .hero .cta-row{gap:18px}
+}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .paper,.artifact .chip,.badge .dot::after{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<span class="mesh"></span>
+
+<!-- ============================ HERO (Attention) ============================ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="badge"><span class="dot"></span> Livre Blanc exclusif · Gratuit</span>
+
+        <!-- VERSION A — live -->
+        <h1>Bâtissez une marque <span class="accent">D2C rentable</span> en 2026, même sans équipe complète</h1>
+
+        <!--
+          VERSION B — A/B test candidate (swap with VERSION A to test)
+          <h1>Transformez l'IA en système omnicanal pour créer, vendre et scaler plus vite</h1>
+        -->
+
+        <p class="sub">Une méthode pratique pour créer, distribuer et piloter plus vite.</p>
+
+        <div class="cta-row">
+          <a href="#form" class="btn js-open-form" aria-controls="leadModal">Télécharger le guide <span class="arrow">→</span></a>
+          <div class="proof-mini">
+            <span class="avatars"><span>AM</span><span>LR</span><span>TC</span></span>
+            <small><b>1 247</b> fondateurs &amp; marketeurs D2C l'ont déjà téléchargé</small>
+          </div>
+        </div>
+      </div>
+
+      <!-- White-paper artifact -->
+      <div class="artifact">
+        <div class="paper">
+          <div class="kicker">Livre Blanc · 2026</div>
+          <div class="ptitle">L'IA au service d'une marque D2C omnicanale et performante</div>
+          <div class="pdesc">De la création de contenu à la distribution multi-canal.</div>
+          <div class="lines"><i></i><i></i><i></i></div>
+          <div class="pmeta"><span>Chapitres</span><b>10</b></div>
+        </div>
+        <div class="chip">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg></span>
+          <span><small>Format</small><b>PDF · 58 pages</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================ STATEMENT (Agitate) ============================ -->
+<section class="statement">
+  <div class="wrap">
+    <div class="inner rv">
+      <p>Le D2C n'est pas saturé.<span class="accent">Il est sophistiqué.</span></p>
+      <div class="src">La performance d'une marque commence bien avant la première publicité — c'est une question de méthode, pas de budget.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BENEFITS (Interest + Desire) ============================ -->
+<section class="blk" id="benefits">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Ce que vous obtenez</span>
+      <h2>Ce que vous allez découvrir</h2>
+      <p>Du diagnostic de marché au pilotage de la rentabilité : une méthode D2C ancrée dans la pratique.</p>
+    </div>
+
+    <div class="bento">
+      <!-- Feature card (benefit 1) -->
+      <article class="bcard feature rv">
+        <div>
+          <span class="num">01 — POSITIONNEMENT</span>
+          <div class="ic-box" style="margin-top:18px">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+          </div>
+          <h3>Diagnostiquez votre marché avant de créer</h3>
+          <p>Identifiez le stade de sophistication de votre audience pour choisir le bon angle, la bonne promesse et la bonne objection à traiter.</p>
+        </div>
+        <div class="big-illu" aria-hidden="true">
+          <div class="row r1"><b></b><span></span></div>
+          <div class="row r2"><b></b><span></span></div>
+          <div class="row r3"><b></b><span></span></div>
+        </div>
+      </article>
+
+      <!-- Benefit 2 -->
+      <article class="bcard rv" data-d="1">
+        <span class="num">02 — PRODUCTION</span>
+        <div class="ic-box" style="margin-top:18px">
+          <svg viewBox="0 0 24 24"><polygon points="13 2 4 14 11 14 11 22 20 10 13 10 13 2"/></svg>
+        </div>
+        <h3>Produisez à la vitesse de l'IA</h3>
+        <p>Transformez scripts, hooks, images, vidéos et emails en variations testables sans bloquer sur la production créative.</p>
+      </article>
+
+      <!-- Benefit 3 -->
+      <article class="bcard rv" data-d="2">
+        <span class="num">03 — RENTABILITÉ</span>
+        <div class="ic-box" style="margin-top:18px">
+          <svg viewBox="0 0 24 24"><line x1="4" y1="20" x2="4" y2="11"/><line x1="11" y1="20" x2="11" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/><line x1="2.5" y1="20" x2="20" y2="20"/></svg>
+        </div>
+        <h3>Pilotez la rentabilité, pas les vues</h3>
+        <p>Reliez organique, paid, CRM et marketplaces autour des métriques qui disent si votre modèle peut vraiment scaler.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SOCIAL PROOF ============================ -->
+<section class="proof">
+  <div class="wrap">
+    <div class="rv">
+      <div class="stamp">
+        <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        Rédigé par un e-commerçant actif · Mastère Chef de Projet E-Business, ESD Paris 7
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat rv"><div class="big">10</div><div class="lbl">chapitres actionnables, du diagnostic de marché au scaling rentable</div></div>
+      <div class="stat rv" data-d="1"><div class="big">67%</div><div class="lbl">des achats sont décidés par l'histoire de la marque, pas par le produit</div></div>
+      <div class="stat rv" data-d="2"><div class="big">1 → 10</div><div class="lbl">un fondateur seul peut faire le travail d'une équipe entière avec le bon stack IA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROGRAMME (depth / desire) ============================ -->
+<section class="blk" id="programme">
+  <div class="wrap">
+    <div class="shead rv">
+      <span class="eyebrow">Au programme</span>
+      <h2>10 chapitres, de l'état du marché au playbook</h2>
+      <p>Données France &amp; US, sophistication de marché, contenu organique augmenté par l'IA, paid, distribution omnicanale et métriques.</p>
+    </div>
+    <div class="toc">
+      <div class="toc-item rv"><span class="n">01</span><span class="t"><b>Le marché D2C en 2026</b><small>Chiffres FR &amp; US, coûts média, social commerce</small></span></div>
+      <div class="toc-item rv" data-d="1"><span class="n">02</span><span class="t"><b>Désir, TAM &amp; sophistication</b><small>La théorie de Schwartz appliquée au D2C</small></span></div>
+      <div class="toc-item rv"><span class="n">03</span><span class="t"><b>Persona, ICP &amp; recherche terrain</b><small>Trouver le vrai langage du marché</small></span></div>
+      <div class="toc-item rv" data-d="1"><span class="n">04</span><span class="t"><b>L'organique avant l'IA</b><small>Le modèle qui a tout construit</small></span></div>
+      <div class="toc-item rv"><span class="n">05</span><span class="t"><b>L'organique augmenté par l'IA</b><small>Produire, tester, itérer à grande vitesse</small></span></div>
+      <div class="toc-item rv" data-d="1"><span class="n">06</span><span class="t"><b>Paid media &amp; performance</b><small>Meta, TikTok, Google, AppLovin</small></span></div>
+      <div class="toc-item rv"><span class="n">07</span><span class="t"><b>La boucle organique + paid</b><small>L'un valide, l'autre amplifie</small></span></div>
+      <div class="toc-item rv" data-d="1"><span class="n">08</span><span class="t"><b>Distribution omnicanale</b><small>Shopify, TikTok Shop, Amazon, CRM</small></span></div>
+      <div class="toc-item rv"><span class="n">09</span><span class="t"><b>Métriques &amp; scaling durable</b><small>MER, LTV, CAC, contribution margin</small></span></div>
+      <div class="toc-item rv" data-d="1"><span class="n">10</span><span class="t"><b>Le playbook actionnable D2C</b><small>Cinq piliers pour construire et piloter</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ FORM (Action) ============================ -->
+<section class="form-wrap" id="form">
+  <div class="wrap">
+    <div class="form-grid">
+      <div class="form-copy rv">
+        <span class="eyebrow">Téléchargement</span>
+        <h2>Recevez votre guide gratuitement</h2>
+        <p>Entrez vos informations professionnelles. Votre guide arrive en moins de 2 minutes, directement dans votre boîte de réception.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> 58 pages, 10 chapitres actionnables</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Aucune carte bancaire, aucun engagement</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg> Désinscription en un clic, données jamais revendues</li>
+        </ul>
+      </div>
+
+      <div class="form-card rv" data-d="1">
+        <div class="form-teaser">
+          <h3>Recevoir le PDF par email</h3>
+          <p>Le lien PDF est envoyé directement dans l'email de confirmation Brevo. Le formulaire s'ouvre depuis le bouton principal en haut de page.</p>
+          <p class="under-btn">Gratuit · Sans engagement · Désinscription en 1 clic</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================ FOOTER ============================ -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span class="mark"><i></i> Livre Blanc IA &amp; D2C</span>
+      <p>© 2025 Livre Blanc IA &amp; E-commerce D2C · <a href="privacy.html">Politique de confidentialité</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================ COOKIE ============================ -->
+<div class="cookie" id="cookie">
+  <p>Ce site utilise uniquement des cookies essentiels à son fonctionnement. <a href="privacy.html" target="_blank" rel="noopener noreferrer">En savoir plus</a>.</p>
+  <button id="cookieOk">J'ai compris</button>
+</div>
+
+<div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle" hidden>
+  <div class="modal-panel">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Fermer le formulaire">×</button>
+
+    <div id="formInner">
+      <div class="modal-head">
+        <h2 id="leadModalTitle">Recevoir le guide</h2>
+        <p>Complétez les 4 informations ci-dessous. Le lien de téléchargement arrive uniquement par email.</p>
+      </div>
+
+      <form id="lbForm" novalidate>
+        <div class="form-progress" aria-label="Progression du formulaire">
+          <span class="form-progress-fill" id="progressFill"></span>
+          <span class="progress-step is-active"><span class="progress-dot">1</span><span>Email</span></span>
+          <span class="progress-step"><span class="progress-dot">2</span><span>Prénom</span></span>
+          <span class="progress-step"><span class="progress-dot">3</span><span>Nom</span></span>
+          <span class="progress-step"><span class="progress-dot">4</span><span>Marque</span></span>
+        </div>
+
+        <div class="field">
+          <label for="email">Email professionnel</label>
+          <input type="email" id="email" name="email" placeholder="Votre email professionnel" required autocomplete="email" data-step="0" />
+        </div>
+        <div class="field">
+          <label for="firstName">Prénom</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Prénom" required autocomplete="given-name" data-step="1" />
+        </div>
+        <div class="field">
+          <label for="lastName">Nom</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Nom" required autocomplete="family-name" data-step="2" />
+        </div>
+        <div class="field">
+          <label for="company">Marque ou entreprise</label>
+          <input type="text" id="company" name="company" placeholder="Votre marque ou entreprise" required autocomplete="organization" data-step="3" />
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="consent" required />
+          <span>J'accepte que mes données soient utilisées pour recevoir ce guide et des communications liées à la stratégie e-commerce. Aucune vente de données. <a href="privacy.html" target="_blank" rel="noopener noreferrer">Politique de confidentialité</a></span>
+        </label>
+        <div class="err" id="errMsg">Veuillez remplir les 4 champs et cocher la case de consentement.</div>
+        <button type="submit" class="btn" id="submitBtn">Recevoir le guide par email <span class="arrow">→</span></button>
+        <p class="under-btn">Le PDF sera envoyé par email uniquement.</p>
+      </form>
+    </div>
+
+    <div class="thanks" id="thanks">
+      <div class="check"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h2>Merci <span id="thanksName"></span> !</h2>
+      <p>Votre guide arrive dans votre boite email dans moins de 2 minutes. Vérifiez vos spams si besoin.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// BREVO SETUP REQUIRED — see SETUP_BREVO.md before going live
+// Replace: BREVO_API_KEY, BREVO_LIST_ID, BREVO_TEMPLATE_ID
+// ============================================================
+const BREVO_API_KEY = 'REPLACE_WITH_YOUR_BREVO_API_KEY';
+const BREVO_LIST_ID = 3;       // REPLACE with your list ID from Brevo
+const BREVO_TEMPLATE_ID = 1;   // REPLACE with your email template ID
+const PDF_DOWNLOAD_URL = new URL('assets/lb.pdf', window.location.href).href;
+
+async function handleFormSubmit(lead) {
+  try {
+    // Step 1: Create/update contact in Brevo
+    await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
+      body: JSON.stringify({
+        email: lead.email,
+        attributes: {
+          FIRSTNAME: lead.firstName,
+          LASTNAME: lead.lastName,
+          COMPANY: lead.company
+        },
+        listIds: [BREVO_LIST_ID],
+        updateEnabled: true
+      })
+    });
+    // Step 2: Send confirmation email via transactional template
+    await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
+      body: JSON.stringify({
+        to: [{ email: lead.email, name: lead.firstName + ' ' + lead.lastName }],
+        templateId: BREVO_TEMPLATE_ID,
+        params: {
+          FIRSTNAME: lead.firstName,
+          LASTNAME: lead.lastName,
+          COMPANY: lead.company,
+          PDF_DOWNLOAD_URL: PDF_DOWNLOAD_URL,
+          PDF_DOWNLOAD_LINK: PDF_DOWNLOAD_URL
+        }
+      })
+    });
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+}
+
+// ---------- Form ----------
+const form = document.getElementById('lbForm');
+const errMsg = document.getElementById('errMsg');
+const submitBtn = document.getElementById('submitBtn');
+const modal = document.getElementById('leadModal');
+const modalClose = document.getElementById('modalClose');
+const formFields = Array.from(form.querySelectorAll('[data-step]'));
+const progressSteps = Array.from(document.querySelectorAll('.progress-step'));
+const progressFill = document.getElementById('progressFill');
+
+function openModal() {
+  modal.hidden = false;
+  requestAnimationFrame(function () { modal.classList.add('is-open'); });
+  document.body.classList.add('modal-open');
+  setTimeout(function () { document.getElementById('email').focus(); }, 80);
+}
+
+function closeModal() {
+  modal.classList.remove('is-open');
+  document.body.classList.remove('modal-open');
+  setTimeout(function () { modal.hidden = true; }, 180);
+}
+
+document.querySelectorAll('.js-open-form').forEach(function (trigger) {
+  trigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    openModal();
+  });
+});
+modalClose.addEventListener('click', closeModal);
+modal.addEventListener('click', function (e) {
+  if (e.target === modal) closeModal();
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+});
+
+function updateProgress(activeIndex) {
+  progressSteps.forEach(function (step, index) {
+    const hasValue = formFields[index] && formFields[index].value.trim();
+    step.classList.toggle('is-active', index === activeIndex);
+    step.classList.toggle('is-complete', Boolean(hasValue));
+  });
+  progressFill.style.width = activeIndex <= 0 ? '0%' : (activeIndex / 3 * 100) + '%';
+}
+
+formFields.forEach(function (field, index) {
+  field.addEventListener('focus', function () { updateProgress(index); });
+  field.addEventListener('input', function () { updateProgress(index); });
+});
+
+form.addEventListener('submit', async function (e) {
+  e.preventDefault();
+  const lead = {
+    email: document.getElementById('email').value.trim(),
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    company: document.getElementById('company').value.trim()
+  };
+  const consent = document.getElementById('consent').checked;
+  const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email);
+
+  // RGPD: never submit without consent + valid fields
+  if (!emailValid || !lead.firstName || !lead.lastName || !lead.company || !consent) {
+    errMsg.style.display = 'block';
+    return;
+  }
+  errMsg.style.display = 'none';
+  submitBtn.classList.add('loading');
+
+  const result = await handleFormSubmit(lead);
+  if (!result.success) console.error('Brevo error:', result.error);
+
+  showThankYou(lead.firstName);
+});
+
+function showThankYou(firstName) {
+  submitBtn.classList.remove('loading');
+  document.getElementById('formInner').style.display = 'none';
+  document.getElementById('thanksName').textContent = firstName;
+  document.getElementById('thanks').style.display = 'block';
+}
+
+// ---------- Cookie ----------
+const cookie = document.getElementById('cookie');
+if (localStorage.getItem('lb_cookie_ok') === '1') cookie.classList.add('hide');
+document.getElementById('cookieOk').addEventListener('click', function () {
+  localStorage.setItem('lb_cookie_ok', '1');
+  cookie.classList.add('hide');
+});
+
+// ---------- Reveal on scroll (staggered) ----------
+const io = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+
+// ---------- Magnetic CTA (subtle, transform-only, no re-render) ----------
+document.querySelectorAll('.btn').forEach(function (btn) {
+  if (window.matchMedia('(pointer: coarse)').matches) return; // skip touch
+  btn.addEventListener('mousemove', function (e) {
+    const r = btn.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width / 2) * 0.12;
+    const y = (e.clientY - r.top - r.height / 2) * 0.18;
+    btn.style.transform = 'translate(' + x + 'px,' + (y - 2) + 'px)';
+  });
+  btn.addEventListener('mouseleave', function () { btn.style.transform = ''; });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# OS / editor cruft
+.DS_Store
+
+# Local preview / tooling (not part of the deliverable)
+.claude/
