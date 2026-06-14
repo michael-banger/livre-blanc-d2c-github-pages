@@ -629,8 +629,8 @@ footer{border-top:1px solid var(--line);padding:30px 0}
 
 <!-- ============================ COOKIE ============================ -->
 <div class="cookie" id="cookie">
-  <p>Ce site utilise uniquement des cookies essentiels à son fonctionnement. <a href="privacy.html" target="_blank" rel="noopener noreferrer">En savoir plus</a>.</p>
-  <button id="cookieOk">J'ai compris</button>
+  <p>Ce site utilise des cookies de mesure d'audience Google Analytics après votre accord. <a href="privacy.html" target="_blank" rel="noopener noreferrer">En savoir plus</a>.</p>
+  <button id="cookieOk">J'accepte</button>
 </div>
 
 <div class="modal" id="leadModal" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle" hidden>
@@ -687,6 +687,35 @@ footer{border-top:1px solid var(--line);padding:30px 0}
 </div>
 
 <script>
+// ============================================================
+// GOOGLE ANALYTICS 4 SETUP
+// Replace GA4_MEASUREMENT_ID with the Web stream ID (G-XXXXXXXXXX).
+// Analytics loads only after cookie consent.
+// ============================================================
+const GA4_MEASUREMENT_ID = 'G-NFWCRWSF3D';
+window.dataLayer = window.dataLayer || [];
+function gtag() { window.dataLayer.push(arguments); }
+
+function analyticsEnabled() {
+  return GA4_MEASUREMENT_ID.indexOf('G-') === 0;
+}
+
+function enableAnalytics() {
+  if (!analyticsEnabled() || document.getElementById('ga4-script')) return;
+  const script = document.createElement('script');
+  script.id = 'ga4-script';
+  script.async = true;
+  script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_MEASUREMENT_ID);
+  document.head.appendChild(script);
+  gtag('js', new Date());
+  gtag('config', GA4_MEASUREMENT_ID, { anonymize_ip: true });
+}
+
+function trackEvent(name, parameters) {
+  if (!analyticsEnabled() || localStorage.getItem('lb_cookie_ok') !== '1') return;
+  gtag('event', name, parameters || {});
+}
+
 // ============================================================
 // BREVO SETUP REQUIRED — see SETUP_BREVO.md before going live
 // Replace: BREVO_API_KEY, BREVO_LIST_ID, BREVO_TEMPLATE_ID
@@ -761,7 +790,9 @@ function closeModal() {
 document.querySelectorAll('.js-open-form').forEach(function (trigger) {
   trigger.addEventListener('click', function (e) {
     e.preventDefault();
+    trackEvent('cta_click', { cta_location: 'hero', cta_label: 'telecharger_le_guide' });
     openModal();
+    trackEvent('form_open', { form_name: 'livre_blanc_d2c' });
   });
 });
 modalClose.addEventListener('click', closeModal);
@@ -804,6 +835,7 @@ form.addEventListener('submit', async function (e) {
   }
   errMsg.style.display = 'none';
   submitBtn.classList.add('loading');
+  trackEvent('form_submit_attempt', { form_name: 'livre_blanc_d2c' });
 
   const result = await handleFormSubmit(lead);
   if (!result.success) console.error('Brevo error:', result.error);
@@ -816,14 +848,20 @@ function showThankYou(firstName) {
   document.getElementById('formInner').style.display = 'none';
   document.getElementById('thanksName').textContent = firstName;
   document.getElementById('thanks').style.display = 'block';
+  trackEvent('generate_lead', { form_name: 'livre_blanc_d2c', delivery_method: 'email' });
 }
 
 // ---------- Cookie ----------
 const cookie = document.getElementById('cookie');
-if (localStorage.getItem('lb_cookie_ok') === '1') cookie.classList.add('hide');
+if (localStorage.getItem('lb_cookie_ok') === '1') {
+  cookie.classList.add('hide');
+  enableAnalytics();
+}
 document.getElementById('cookieOk').addEventListener('click', function () {
   localStorage.setItem('lb_cookie_ok', '1');
   cookie.classList.add('hide');
+  enableAnalytics();
+  trackEvent('cookie_consent_granted', { consent_type: 'analytics' });
 });
 
 // ---------- Reveal on scroll (staggered) ----------
