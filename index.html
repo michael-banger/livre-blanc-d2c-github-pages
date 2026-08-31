@@ -719,47 +719,23 @@ function trackEvent(name, parameters) {
 }
 
 // ============================================================
-// BREVO SETUP REQUIRED, see SETUP_BREVO.md before going live
-// Replace: BREVO_API_KEY, BREVO_LIST_ID, BREVO_TEMPLATE_ID
+// Email delivery goes through /api/send-guide (Vercel serverless
+// function). The Brevo API key stays server-side only — never
+// put it in this file, it is public.
 // ============================================================
-const BREVO_API_KEY = 'REPLACE_WITH_YOUR_BREVO_API_KEY';
-const BREVO_LIST_ID = 3;       // REPLACE with your list ID from Brevo
-const BREVO_TEMPLATE_ID = 1;   // REPLACE with your email template ID
-const PDF_DOWNLOAD_URL = new URL('assets/lb.pdf', window.location.href).href;
+const SEND_GUIDE_ENDPOINT = 'https://livre-blanc-yann-s.vercel.app/api/send-guide';
 
 async function handleFormSubmit(lead) {
   try {
-    // Step 1: Create/update contact in Brevo
-    await fetch('https://api.brevo.com/v3/contacts', {
+    const res = await fetch(SEND_GUIDE_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
-      body: JSON.stringify({
-        email: lead.email,
-        attributes: {
-          FIRSTNAME: lead.firstName,
-          LASTNAME: lead.lastName,
-          COMPANY: lead.company
-        },
-        listIds: [BREVO_LIST_ID],
-        updateEnabled: true
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(lead)
     });
-    // Step 2: Send confirmation email via transactional template
-    await fetch('https://api.brevo.com/v3/smtp/email', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'api-key': BREVO_API_KEY },
-      body: JSON.stringify({
-        to: [{ email: lead.email, name: lead.firstName + ' ' + lead.lastName }],
-        templateId: BREVO_TEMPLATE_ID,
-        params: {
-          FIRSTNAME: lead.firstName,
-          LASTNAME: lead.lastName,
-          COMPANY: lead.company,
-          PDF_DOWNLOAD_URL: PDF_DOWNLOAD_URL,
-          PDF_DOWNLOAD_LINK: PDF_DOWNLOAD_URL
-        }
-      })
-    });
+    if (!res.ok) {
+      const body = await res.json().catch(function () { return {}; });
+      return { success: false, error: body.error || ('http_' + res.status) };
+    }
     return { success: true };
   } catch (error) {
     return { success: false, error: error.message };
@@ -832,6 +808,7 @@ form.addEventListener('submit', async function (e) {
 
   // RGPD: never submit without consent + valid fields
   if (!emailValid || !lead.firstName || !lead.lastName || !lead.company || !consent) {
+    errMsg.textContent = 'Veuillez remplir les 4 champs et cocher la case de consentement.';
     errMsg.style.display = 'block';
     return;
   }
@@ -840,7 +817,15 @@ form.addEventListener('submit', async function (e) {
   trackEvent('form_submit_attempt', { form_name: 'livre_blanc_d2c' });
 
   const result = await handleFormSubmit(lead);
-  if (!result.success) console.error('Brevo error:', result.error);
+
+  if (!result.success) {
+    console.error('Send guide error:', result.error);
+    submitBtn.classList.remove('loading');
+    errMsg.textContent = "Un problème est survenu lors de l'envoi. Réessayez ou écrivez-nous directement.";
+    errMsg.style.display = 'block';
+    trackEvent('generate_lead_failed', { form_name: 'livre_blanc_d2c', error: result.error });
+    return;
+  }
 
   showThankYou(lead.firstName);
 });
